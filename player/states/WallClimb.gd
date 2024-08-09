@@ -1,6 +1,6 @@
 extends PlayerState
 
-@export var move_speed: float = 5
+@export var move_speed: float = 2.5
 @export var acceleration: float = 50
 @export var normal_smoothing_speed: float = 2.5
 
@@ -25,7 +25,7 @@ func physics_process(delta):
 		motion -= avg_norm * 0.01 # wall cling
 		player.horizontal_velocity = motion
 		player.y_velocity = motion.y
-		
+
 		player.skin.transform.basis = Basis.looking_at(-avg_norm, Vector3.UP)
 	elif player.is_on_floor():
 		state_machine.transition_to("OnGround")

@@ -12,7 +12,7 @@ func process(delta):
 		# if the player is crouching, transition to the Crouching state, which will determine actual
 		# sub state (e.g. stopped or moving) checked its own
 		state_machine.transition_to("Crouching")
-	elif player.is_on_wall() && player.on_wall && player.wall_normal().dot(player.horizontal_velocity.normalized()) < -0.5:
+	elif player.is_on_wall() && player.wall_normal().dot(player.horizontal_velocity.normalized()) < -0.5:
 		state_machine.transition_to("Climbing")
 	elif player.controls.is_dashing() && player.dash_timer.is_stopped():
 		# if the player is trying to dash and if they CAN dash, transition to the OnGround/Dashing state

@@ -21,7 +21,6 @@ var horizontal_velocity: Vector3 = Vector3.ZERO
 var y_velocity: float = 0
 var head_above_water: bool = true
 var move_rot: float = 0
-var on_wall: bool = false
 
 func _ready():
 	# watch for changes in the movement state
@@ -72,11 +71,3 @@ func wall_normal():
 				avg_norm /= wall_contact_count
 		return avg_norm
 	return Vector3.ZERO
-
-
-func _on_wall_detector_area_entered(area):
-	on_wall = true
-	print("wall enter")
-func _on_wall_detector_area_exited(area):
-	on_wall = false
-	print("wall exit")

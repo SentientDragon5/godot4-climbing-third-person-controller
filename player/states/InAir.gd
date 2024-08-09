@@ -24,7 +24,7 @@ func process(delta):
 	_jump_cooldown_remaining = max(_jump_cooldown_remaining - delta, 0)
 
 	# if the player is trying to jump and they CAN jump, transition to the InAir/Jumping state
-	if player.is_on_wall() && player.on_wall && player.wall_normal().dot(player.horizontal_velocity.normalized()) < -0.5:
+	if player.is_on_wall() && player.wall_normal().dot(player.horizontal_velocity.normalized()) < -0.5:
 		state_machine.transition_to("Climbing")
 	elif player.controls.is_jumping() && can_jump():
 		state_machine.transition_to("InAir/Jumping")

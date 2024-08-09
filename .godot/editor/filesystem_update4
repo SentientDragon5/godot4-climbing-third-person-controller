@@ -3,3 +3,10 @@ res://materials/orange.tres
 res://player/Player.tscn
 res://player/Controls.tscn
 res://player/ControllableCamera.tscn
+res://player/states/WallRun.gd
+res://player/states/Climbing.gd
+res://player/states/WallClimb.gd
+res://player/Player.gd
+res://player/ClimbToTop.gd
+res://player/states/OnGround.gd
+res://player/states/InAir.gd

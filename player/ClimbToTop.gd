@@ -1,11 +1,12 @@
-extends Node
+extends PlayerState
 
+func enter():
+	var direction = Vector3.FORWARD.rotated(Vector3.UP, player.skin.rotation.y).normalized()
+	player.anim_tree.set("parameters/ClimbTop/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func process(delta):
 	pass
+
+func physics_process(delta):
+	print(player.anim_tree.get("parameters/ClimbTop/active"))
+	#state_machine.transition_to(parent.get_path())
