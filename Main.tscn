@@ -1,10 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://duugmnauemcc7"]
+[gd_scene load_steps=12 format=3 uid="uid://duugmnauemcc7"]
 
 [ext_resource type="PackedScene" uid="uid://c0vnqt6uyxaoa" path="res://player/Player.tscn" id="1"]
 [ext_resource type="Material" uid="uid://cb6br3g0cy6c1" path="res://assets/materials/Grass.tres" id="1_ugafu"]
 [ext_resource type="Material" uid="uid://c560kh0cq42t2" path="res://assets/materials/Concrete.tres" id="2_4xuie"]
 [ext_resource type="Material" uid="uid://cotjsbb4imdui" path="res://assets/materials/Wood.tres" id="3_tqk2n"]
-[ext_resource type="Texture2D" uid="uid://btrceayvxka1y" path="res://assets/textures/dirt256x256.png" id="4_54p8n"]
+[ext_resource type="Material" uid="uid://ctvnrnoceypoo" path="res://materials/orange.tres" id="4_apqrj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ukb2j"]
 
@@ -15,14 +15,10 @@ sky_material = SubResource("ProceduralSkyMaterial_ukb2j")
 background_mode = 2
 sky = SubResource("1")
 
-[sub_resource type="StandardMaterial3D" id="5"]
-albedo_texture = ExtResource("4_54p8n")
-uv1_triplanar = true
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_41aqy"]
 transparency = 1
 shading_mode = 0
-albedo_color = Color(0.12549, 0.701961, 0.894118, 0.627451)
+albedo_color = Color(0.0431373, 0.572549, 1, 0.188235)
 
 [sub_resource type="BoxMesh" id="6"]
 material = SubResource("StandardMaterial3D_41aqy")
@@ -74,11 +70,53 @@ material = ExtResource("2_4xuie")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -3.61853, -8.32862)
 operation = 2
 size = Vector3(24, 10, 16)
-material = SubResource("5")
+material = ExtResource("4_apqrj")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(0.712247, 0.701929, 0, -0.701929, 0.712247, 0, 0, 0, 1, -8.23782, -9.53674e-07, 7.97163)
+size = Vector3(14.0495, 9.31034, 5.62455)
+material = ExtResource("4_apqrj")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(0.353067, 0.935598, 0, -0.935598, 0.353067, 0, 0, 0, 1, -11.3199, -0.170955, 2.56349)
+size = Vector3(18.3428, 9.31034, 11.2393)
+material = ExtResource("4_apqrj")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(0.995811, 0.0914321, 0, -0.0914321, 0.995811, 0, 0, 0, 1, -20.9667, 11.4966, 5.12749)
+size = Vector3(8.46247, 3.24911, 9.23401)
+material = ExtResource("4_apqrj")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(0.900645, -0.434555, 0, 0.434555, 0.900645, 0, 0, 0, 1, -27.0434, 11.0234, 5.12749)
+size = Vector3(8.46247, 3.24911, 9.23401)
+material = ExtResource("4_apqrj")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(0.037725, -0.999288, 0, 0.999288, 0.037725, 0, 0, 0, 1, -30.2375, 7.7874, 5.12749)
+size = Vector3(8.46247, 3.24911, 9.23401)
+material = ExtResource("4_apqrj")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(-0.76321, -0.64615, 0, 0.64615, -0.76321, 0, 0, 0, 1, 6.98964, -8.47669, -13.7815)
+size = Vector3(15.1017, 9.70899, 9.23401)
+material = ExtResource("4_apqrj")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(-0.928207, -0.372064, 0, 0.372064, -0.928207, 0, 0, 0, 1, 16.4881, -10.0296, -17.6286)
+size = Vector3(30.8017, 9.70899, 9.23401)
+material = ExtResource("4_apqrj")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(0.049948, 0.998752, 0, -0.988815, 0.049451, -0.140711, -0.140536, 0.00702823, 0.990051, -8.57193, 3.26085, 3.96895)
+size = Vector3(22.019, 21.7173, 3.11212)
+material = ExtResource("4_apqrj")
 
 [node name="Player" parent="." instance=ExtResource("1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.24706, 0, 4.67049)
 collision_mask = 5
+floor_stop_on_slope = false
+floor_block_on_wall = false
 
 [node name="Water" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -5.8162, -8)

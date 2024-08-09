@@ -12,18 +12,27 @@ config_version=5
 
 config/name="Third Person"
 run/main_scene="res://Main.tscn"
-config/features=PackedStringArray("4.2")
+config/features=PackedStringArray("4.1")
+boot_splash/fullsize=false
 config/icon="res://icon.png"
 
 [display]
 
-window/size/viewport_width=1366
-window/size/viewport_height=768
+window/size/viewport_width=600
+window/size/viewport_height=300
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
-window/dpi/allow_hidpi=false
 window/size/width=1366
 window/size/height=768
+
+[dotnet]
+
+project/assembly_name="Third Person"
+
+[editor]
+
+movie_writer/movie_file="C:/Users/senti/Downloads/godot4-third-person-controller-master/godot4-third-person-controller-master/videos/record.avi"
+movie_writer/fps=30
 
 [input]
 

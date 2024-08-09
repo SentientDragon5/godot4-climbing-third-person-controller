@@ -1,5 +1,5 @@
 res://Main.tscn
+res://materials/orange.tres
 res://player/Player.tscn
 res://player/Controls.tscn
-res://player/Controls.gd
-res://player/states/OnGround.gd
+res://player/ControllableCamera.tscn

@@ -21,38 +21,62 @@ var horizontal_velocity: Vector3 = Vector3.ZERO
 var y_velocity: float = 0
 var head_above_water: bool = true
 var move_rot: float = 0
+var on_wall: bool = false
 
 func _ready():
-    # watch for changes in the movement state
-    sm_movement.connect("transitioned", self._on_move_state_changed)
+	# watch for changes in the movement state
+	sm_movement.connect("transitioned", self._on_move_state_changed)
 
 func _physics_process(delta):
-    # the real velocity is a combination of the horizontal and vertical velocities as determined by
-    # the movement state machine
-    velocity = Vector3(horizontal_velocity.x, y_velocity, horizontal_velocity.z)
-    move_and_slide()
+	# the real velocity is a combination of the horizontal and vertical velocities as determined by
+	# the movement state machine
+	velocity = Vector3(horizontal_velocity.x, y_velocity, horizontal_velocity.z)
+	move_and_slide()
 
 func _on_DeepWaterDetector_area_entered(area):
-    # entered a deep enough water to swim in, transition to the Swimming/Diving state
-    sm_movement.transition_to("Swimming/Diving")
+	# entered a deep enough water to swim in, transition to the Swimming/Diving state
+	sm_movement.transition_to("Swimming/Diving")
 
 func _on_DeepWaterDetector_area_exited(area):
-    # exited deep water, transition to the InAir/Falling state
-    sm_movement.transition_to("InAir/Falling")
+	# exited deep water, transition to the InAir/Falling state
+	sm_movement.transition_to("InAir/Falling")
 
 func _on_WaterSurfaceDetector_area_entered(area):
-    # the player's head is below the water surface
-    head_above_water = false
+	# the player's head is below the water surface
+	head_above_water = false
 
 func _on_WaterSurfaceDetector_area_exited(area):
-    # the player's head is above the water surface
-    head_above_water = true
+	# the player's head is above the water surface
+	head_above_water = true
 
 func _on_move_state_changed(new_state):
-    # trigger the
-    emit_signal("movement_state_changed", new_state)
+	# trigger the
+	emit_signal("movement_state_changed", new_state)
 
 func has_movement():
-    # the player is fully stopped only if both the movement vector and the velocity
-    # vectors are approximately zero. otherwise it means they have movement
-    return controls.get_movement_vector() != Vector2.ZERO || !velocity.is_equal_approx(Vector3.ZERO)
+	# the player is fully stopped only if both the movement vector and the velocity
+	# vectors are approximately zero. otherwise it means they have movement
+	return controls.get_movement_vector() != Vector2.ZERO || !velocity.is_equal_approx(Vector3.ZERO)
+
+func wall_normal():
+	if is_on_wall():
+		var avg_norm = Vector3.ZERO;
+		var wall_contact_count = 0;
+		for i in get_slide_collision_count():
+			var norm = get_slide_collision(i).get_normal()
+			if norm.dot(Vector3.UP) < 0.9 && norm.dot(Vector3.DOWN) < 0.9:
+				if wall_contact_count > 0:
+					avg_norm /= wall_contact_count
+				wall_contact_count += 1;
+				avg_norm += norm
+				avg_norm /= wall_contact_count
+		return avg_norm
+	return Vector3.ZERO
+
+
+func _on_wall_detector_area_entered(area):
+	on_wall = true
+	print("wall enter")
+func _on_wall_detector_area_exited(area):
+	on_wall = false
+	print("wall exit")
